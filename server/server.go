@@ -36,7 +36,7 @@ func NewHTTPServer() *server.StreamableHTTPServer {
 
 func registerTools(s *server.MCPServer) {
 	s.AddTool(
-		mcp.NewTool("search_diabetes_knowledge_graph",
+		mcp.NewTool("search_diabetes_kg",
 			mcp.WithDescription(`
 				Search professional information about diabetes guidelines, medications, diagnostics, and treatments. 
 				Returns structured data from knowledge graph (entities and relationships). 
@@ -57,14 +57,14 @@ func registerTools(s *server.MCPServer) {
 
 	s.AddTool(
 		mcp.NewTool("fetch_health_data",
-			mcp.WithDescription("Get user health data including blood glucose records, health profile, and exercise records."),
+			mcp.WithDescription("Get user health data including blood glucose records, exercise records, and health profile."),
 			mcp.WithString("type",
 				mcp.Required(),
-				mcp.Enum("blood_glucose", "health_profile", "exercise_records"),
+				mcp.Enum("blood_glucose_records", "exercise_records", "health_profile"),
 				mcp.Description("Type of health data to retrieve"),
 			),
 			mcp.WithNumber("limit",
-				mcp.Description("Number of most recent records to return (10-100, only for blood_glucose and exercise_records)"),
+				mcp.Description("Number of most recent records to return (10-100, only for blood_glucose_records and exercise_records)"),
 				mcp.Min(10),
 				mcp.Max(100),
 			),
